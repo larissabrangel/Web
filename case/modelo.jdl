@@ -1,0 +1,38 @@
+application {
+  config {
+    baseName metasEnem
+    applicationType monolith
+    authenticationType jwt
+    prodDatabaseType postgresql
+    devDatabaseType postgresql
+    buildTool maven
+    clientFramework angular
+    packageName com.exemplo.metas
+  }
+
+  entities Aluno, Meta
+}
+
+enum AreaDoEnem {
+  LINGUAGENS,
+  HUMANAS,
+  NATUREZA,
+  MATEMATICA
+}
+
+entity Aluno {
+  nome String required minlength(3)
+}
+
+entity Meta {
+  valor Integer required min(0) max(1000)
+  area AreaDoEnem required
+}
+
+relationship ManyToOne {
+  Meta{aluno} to Aluno
+}
+
+dto * with mapstruct
+paginate * with pagination
+service * with serviceClass
